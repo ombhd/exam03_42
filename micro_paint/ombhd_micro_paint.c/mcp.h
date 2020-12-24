@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mp.h                                               :+:      :+:    :+:   */
+/*   mcp.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 12:56:12 by obouykou          #+#    #+#             */
-/*   Updated: 2020/12/23 12:59:36 by obouykou         ###   ########.fr       */
+/*   Updated: 2020/12/24 15:38:59 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _MP_H_
-# define _MP_H
+#ifndef _MCP_H_
+# define _MCP_H
 
 #include <stdio.h>
 #include <unistd.h>
@@ -19,6 +19,7 @@
 #include <math.h>
 #include <string.h>
 
+# define is_vld(w, h) (h > 0 && h <= 300 && w > 0 && w <= 300)
 # define is_vld(w, h) (h > 0 && h <= 300 && w > 0 && w <= 300)
 
 typedef struct	s_indexer
@@ -47,5 +48,8 @@ typedef	struct	s_mp
 	char	**arr;
 	t_indexer idx;
 }				t_mp;
+
+int		check_op(t_mp *mp);
+int		corrupted(int err);
 
 #endif

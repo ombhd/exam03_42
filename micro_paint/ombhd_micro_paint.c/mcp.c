@@ -6,11 +6,11 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 10:14:46 by obouykou          #+#    #+#             */
-/*   Updated: 2020/12/23 13:01:08 by obouykou         ###   ########.fr       */
+/*   Updated: 2020/12/24 15:23:46 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mp.h"
+#include "mcp.h"
 
 void	ft_putchar(char c)
 {
@@ -63,8 +63,6 @@ char **	alloc_fill_arr(int w, int h, int b_char)
 	return (matrix);
 }
 
-
-
 int		main(int ac, char **av)
 {
 	FILE *f;
@@ -85,7 +83,8 @@ int		main(int ac, char **av)
 	{
 		if (b != 5)
 			return (corrupted(2));
-		if (check_op();
+		if (check_op(mp))
+			return (corrupted(2));
 		
 		
 	}
