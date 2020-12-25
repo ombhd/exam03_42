@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 10:14:46 by obouykou          #+#    #+#             */
-/*   Updated: 2020/12/24 15:23:46 by obouykou         ###   ########.fr       */
+/*   Updated: 2020/12/25 19:29:09 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,9 @@ void	ft_putstr(char *s)
 		ft_putchar(*s++);
 }
 
-int		corrupted(int err)
+int		corrupted(void)
 {
-	if (err == 1)
-		ft_putstr("Error: Operation file corrupted\n");
-	else
-		ft_putstr("Error: Operation file is not valid\n");
+	ft_putstr("Error: Operation file corrupted\n");
 	return (1);
 }
 
@@ -41,8 +38,8 @@ int		check_args_file(int ac, char **av, FILE **f, t_mp *mp)
 		ft_putstr("Error: argument\n");
 		return (1);
 	}
-	if (!(*f = fopen(av[1], "r+")) || fscanf(*f, "%d %d %c", &mp->bg.w, &mp->bg.h, &mp->bg.c) != 3)
-		return (corrupted(1));
+	if (!(*f = fopen(av[1], "r")) || fscanf(*f, "%d %d %c\n", &mp->bg.w, &mp->bg.h, &mp->bg.c) != 3)
+		return (corrupted());
 	return (0);
 }
 
@@ -63,31 +60,45 @@ char **	alloc_fill_arr(int w, int h, int b_char)
 	return (matrix);
 }
 
+void	print_arr(char **arr)
+{
+	if (arr)
+		while (*arr)
+		{
+			ft_putstr(*arr++);
+			ft_putchar('\n');
+		}
+}
+
 int		main(int ac, char **av)
 {
 	FILE *f;
 	t_mp *mp;
+	t_mp mcp;
+	char **arr;
 	int i;
 	int j;
 	int b;
 	
-	if (!(mp = (t_mp *)malloc(sizeof(t_mp))))
-		return (1);
+	mp = &mcp;
 	if (check_args_file(ac, av, &f, mp))
 		return (1);
 	if (!is_vld(mp->bg.w, mp->bg.h) || !mp->bg.c)
-		return (corrupted(2));
-	mp->arr = alloc_fill_arr(mp->bg.w, mp->bg.h, mp->bg.c);
-	b = 5;
-	while ((b = fscanf(f, "\n%c %f %f %f %f %c"), mp->spec, mp->x, mp->y, mp->w, mp->h, mp->c) != EOF)
-	{
-		if (b != 5)
-			return (corrupted(2));
-		if (check_op(mp))
-			return (corrupted(2));
+		return (corrupted());
+	arr = alloc_fill_arr(mp->bg.w, mp->bg.h, mp->bg.c);
+	print_arr(arr);
+	exit (0);
+	// b = 5;
+	// *mp = (struct s_mp){0};
+	// while ((b = fscanf(f, "%c %f %f %f %f %c\n"), &mp->spec, &mp->x, &mp->y, &mp->w, &mp->h, &mp->c) != EOF)
+	// {
+	// 	if (b != 5 && mp->spec != 0)
+	// 		return (corrupted());
+	// 	if (check_op(mp))
+	// 		return (corrupted());
 		
-		
-	}
+	// 	*mp = (struct s_mp){0};
+	// }
 	fclose(f);
 	return (0);
 }
