@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 12:56:12 by obouykou          #+#    #+#             */
-/*   Updated: 2020/12/25 17:42:55 by obouykou         ###   ########.fr       */
+/*   Updated: 2020/12/28 19:18:36 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef	struct	s_point
 	int		y;
 }				t_point;
 
+// typedef	struct	s_fpoint
+// {
+// 	float	x;
+// 	float	y;
+// }				t_fpoint;
+
 typedef struct	s_bgd
 {
 	int		w;
@@ -44,13 +50,15 @@ typedef	struct	s_mp
 {
 	t_bgd	bg;
 	char	spec;
-	float	x;
-	float	y;
+	float	xt;
+	float	xb;
+	float	yt;
+	float	yb;
 	float	w;
 	float	h;
 	char	c;
-	t_point rt;
-	t_point rb;
+	t_point rti;
+	t_point rbi;
 	char	**rec;
 	t_indexer idx;
 }				t_mp;

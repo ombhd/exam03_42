@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 10:14:46 by obouykou          #+#    #+#             */
-/*   Updated: 2020/12/25 19:29:09 by obouykou         ###   ########.fr       */
+/*   Updated: 2020/12/28 15:44:25 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,18 @@ void	print_arr(char **arr)
 		}
 }
 
+void	print_mcp(t_mp *mp, int b)
+{
+	if (!mp)
+	{
+		puts("\nYour struct is NULL");
+		return ;
+	}
+	printf("number of read values = b =|%d|\n", b);
+	printf("spec=|%c|\tX=|%f|\tY=|%f|\tW=|%f|\tH=|%f|\tCHAR|%c|\n",mp->spec, mp->x, mp->y, mp->w, mp->h, mp->c);
+	
+}
+
 int		main(int ac, char **av)
 {
 	FILE *f;
@@ -81,24 +93,23 @@ int		main(int ac, char **av)
 	int b;
 	
 	mp = &mcp;
+	*mp = (struct s_mp){0};
 	if (check_args_file(ac, av, &f, mp))
 		return (1);
 	if (!is_vld(mp->bg.w, mp->bg.h) || !mp->bg.c)
 		return (corrupted());
 	arr = alloc_fill_arr(mp->bg.w, mp->bg.h, mp->bg.c);
 	print_arr(arr);
-	exit (0);
-	// b = 5;
-	// *mp = (struct s_mp){0};
-	// while ((b = fscanf(f, "%c %f %f %f %f %c\n"), &mp->spec, &mp->x, &mp->y, &mp->w, &mp->h, &mp->c) != EOF)
-	// {
-	// 	if (b != 5 && mp->spec != 0)
-	// 		return (corrupted());
-	// 	if (check_op(mp))
-	// 		return (corrupted());
-		
-	// 	*mp = (struct s_mp){0};
-	// }
+	while ((b = fscanf(f, "%c %f %f %f %f %c\n", &mp->spec,\
+					&mp->x, &mp->y, &mp->w, &mp->h, &mp->c)) != EOF)
+	{
+		print_mcp(mp, b);
+		if (b != 6 && mp->spec != 0)
+			return (corrupted());
+		if (check_op(mp))
+			return (corrupted());
+		*mp = (struct s_mp){0};
+	}
 	fclose(f);
 	return (0);
 }
