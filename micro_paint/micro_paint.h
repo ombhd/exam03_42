@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mcp.h                                              :+:      :+:    :+:   */
+/*   micro_paint.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 12:56:12 by obouykou          #+#    #+#             */
-/*   Updated: 2020/12/28 19:18:36 by obouykou         ###   ########.fr       */
+/*   Updated: 2020/12/29 09:49:09 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,20 @@ typedef	struct	s_mp
 	t_bgd	bg;
 	char	spec;
 	float	xt;
-	float	xb;
 	float	yt;
+	float	xb;
 	float	yb;
 	float	w;
 	float	h;
 	char	c;
-	t_point rti;
-	t_point rbi;
 	char	**rec;
 	t_indexer idx;
 }				t_mp;
 
 int		check_op(t_mp *mp);
 int		corrupted(void);
+
+// Debugging
+void	print_arr(char **arr);
 
 #endif
