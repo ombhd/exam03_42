@@ -6,11 +6,13 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 10:14:46 by obouykou          #+#    #+#             */
-/*   Updated: 2021/01/06 19:52:24 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/01/07 17:55:52 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "micro_paint.h"
+
+#define N1 1.00000000
 
 void	ft_putchar(char c)
 {
@@ -92,25 +94,20 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
-int		intig(float r)
+int		intig(t_mp *mp, float x, float y)
 {
-	int i;
-
-	i = r - (int)r != 0.000000 ? (int)r + 1 : (int)r;
-	// printf("\nr=|%f|\t(int)r=|%d|\t r - (int)r = |%f| (int)r + 1 = |%d|\n", r, (int)r, r - (int)r, (int)r + 1);
-	return (i);
+	return (x - mp->xt < N1 || mp->xb - x < N1 || y - mp->yt < N1 || mp->yb - y < N1);
 }
 
-int		test_index(t_mp *mp, float i, float j)
+int		test_index(t_mp *mp, float x, float y)
 {
 	int b;
-	//#####################################################################################
-	// HERE ###############################################################################
-	//#####################################################################################
-	b = j >= mp->xt && j <= mp->xb && i >= mp->yt && i <= mp->yb;
+
+	if (!(b = (x >= mp->xt && x <= mp->xb && y >= mp->yt && y <= mp->yb)))
+		return (0);
 	if (b && mp->spec)
 		return (1);
-	else if (b && (i == intig(mp->yt) || i == (int)mp->yb || j == intig(mp->xt) || j == (int)mp->xb))
+	if (!mp->spec && intig(mp, x, y))
 		return (1);
 	return (0);
 }
@@ -119,14 +116,18 @@ void	fill_rec(t_mp *mp)
 {
 	int i;
 	int j;
+	int b;
 
 	i = - 1;
 	while (++i < mp->bg.h)
 	{
 		j = - 1;
 		while (++j < mp->bg.w)
-			if (test_index(mp, i, j))
+		{
+			b = test_index(mp, j, i);
+			if (b)
 				mp->rec[i][j] = mp->c;
+		}
 	}
 }
 
@@ -160,13 +161,13 @@ int		main(int ac, char **av)
 	mp->rec = arr;
 	while ((b = fscanf(f, "%c %f %f %f %f %c\n", &mp->spec, &mp->xt, &mp->yt, &mp->w, &mp->h, &mp->c)) != EOF)
 	{
-		if (b != 6 && mp->spec != 0)
+		if (b != 6)
 			return (corrupted());
 		if (check_op(mp))
 			return (corrupted());
 	}
 	print_arr(arr);
-	free_arr(arr);
+	// free_arr(arr);
 	fclose(f);
 	return (0);
 }
