@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 10:14:46 by obouykou          #+#    #+#             */
-/*   Updated: 2021/01/07 17:55:52 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/01/07 19:26:29 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int		main(int ac, char **av)
 			return (corrupted());
 	}
 	print_arr(arr);
-	// free_arr(arr);
+	free_arr(arr);
 	fclose(f);
 	return (0);
 }
