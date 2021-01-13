@@ -6,13 +6,14 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 10:14:46 by obouykou          #+#    #+#             */
-/*   Updated: 2021/01/07 19:26:29 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/01/13 16:51:32 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "micro_paint.h"
 
 #define N1 1.00000000
+
 
 void	ft_putchar(char c)
 {
